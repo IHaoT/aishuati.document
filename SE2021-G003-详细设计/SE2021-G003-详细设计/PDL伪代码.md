@@ -10,17 +10,31 @@ begin 学生登录
     else if <密码错误> then
         提式错误
     else 
+    	保存用户信息到session
+    	后台自动生成登录日志
         登录成功
     end if
 end 学生登录
 ```
+
+## student 登出
+
+```PDL
+begin 学生登出
+	从session获取用户的StuId，查询到当前用户
+	后台自动生成登出日志
+	将用户信息从session中移除
+end 学生登出
+```
+
+
 
 ## student注册
 
 ```PDL
 begin 学生注册
 前端传给后端后端登录账号stu_Account、登录密码Pwd11，登录密码pwd2，学生邮箱stu_email、学生电话、学生专业、年级
-	if<账号已存在> then
+	if<账号stuAccount字段已存在> then
 		提式错误
 	else if<pwd1!=pwd2> then
 		提示错误
@@ -44,6 +58,17 @@ begin 修改密码
 		修改成功 
 	end if
 end 修改密码
+```
+
+## 获得个人信息
+
+```Json
+begin 查询个人信息
+	if<点击界面右上方>
+		前端发送请求给服务器，后台从session中获取当前登录的stuId
+		根据stuId查询当前用户的stuName、StuNickeName、stuEmail等信息
+	end if
+end begin
 ```
 
 
@@ -114,10 +139,27 @@ begin 管理员登录
     else if <密码错误> then
         提式错误
     else 
+    	保存用户信息到session
         登录成功
     end if
 end 管理员登录
 ```
+
+## 教师添加
+
+```PDL
+begin 添加教师用户
+	前端传入adminAccount，adminName，adminEmail，adminTelephoto
+	从session中获取当前用户权限，判断权限
+	if<权限为管理员> then
+		后台自动生成默认密码，并与adminAccount合并产生md5加密码作为用户密码存储在数据库中
+	else then
+		返回访问受限
+	end if
+end begin
+```
+
+
 
 ## 题目编创
 
@@ -125,6 +167,7 @@ end 管理员登录
 begin 题目编创
 用户选择出题类型
 	if <用户选择 编创选择题> then
+		前端拼接显示题面信息
 		显示A、B、C、D选项内容的编创信息，计划用markdown格式，可以导入数学公式，并给出正确答案
 	else if<主观题编创> then
 		编辑参考答案
@@ -199,8 +242,5 @@ begin 发布公告
 	end if
 end 发送公告
 ```
-
-
-
 
 
