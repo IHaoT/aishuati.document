@@ -3,6 +3,27 @@
 
  /admin/changeStuInfoById
 
+````json
+{
+   "stuId":"2",
+   "stuName":"chenzizhui",
+   "stuNickName":"chenzihui",
+   "stuEmail":"chenzihui@qq.com",
+   "stuTelephoto":"1234567890123",
+   "majorName":"软件工程",
+   "stu_level":""
+}
+````
+
+````json
+{
+    "code": 200,
+    "msg": "更新成功"
+}
+````
+
+
+
 #### 教师update接口  
 
 /admin/changeTeacherInfo
