@@ -1,6 +1,8 @@
-# PDL伪代码
+# 后端
 
-## student登录
+## 学生端
+
+### 登录
 
 ```PDL
 begin 学生登录
@@ -17,7 +19,7 @@ begin 学生登录
 end 学生登录
 ```
 
-## student 登出
+### 登出
 
 ```PDL
 begin 学生登出
@@ -27,9 +29,7 @@ begin 学生登出
 end 学生登出
 ```
 
-
-
-## student注册
+### 注册
 
 ```PDL
 begin 学生注册
@@ -45,7 +45,7 @@ begin 学生注册
 end 学生注册
 ```
 
-## 学生密码修改
+### 密码修改
 
 ```PLD
 begin 修改密码
@@ -60,7 +60,7 @@ begin 修改密码
 end 修改密码
 ```
 
-## 获得个人信息
+### 获得个人信息
 
 ```Json
 begin 查询个人信息
@@ -71,9 +71,7 @@ begin 查询个人信息
 end begin
 ```
 
-
-
-## 在线刷题
+### 在线刷题
 
 ```PDL
 begin 在线刷题
@@ -95,7 +93,7 @@ begin 在线刷题
 end 在线刷题
 ```
 
-## 查看错题集
+### 查看错题
 
 ```PLD
 begin 查看错题
@@ -103,7 +101,7 @@ begin 查看错题
 end 查看错题
 ```
 
-## 查看历年试卷
+### 查看历年试卷
 
 ```PLD
 begin 查看往年试卷
@@ -114,7 +112,7 @@ begin 查看往年试卷
 end 查看往年试卷
 ```
 
-## 查看未读公告
+### 查看未读公告
 
 ```PLD
 begin 查看未读公告
@@ -129,7 +127,7 @@ begin 查看未读公告
 end 查看未读公告
 ```
 
-### 管理员登录
+## 管理员端
 
 ```PLD
 begin 管理员登录
@@ -145,7 +143,7 @@ begin 管理员登录
 end 管理员登录
 ```
 
-## 教师添加
+### 教师添加
 
 ```PDL
 begin 添加教师用户
@@ -159,9 +157,7 @@ begin 添加教师用户
 end begin
 ```
 
-
-
-## 题目编创
+### 题目编创
 
 ```PLLD
 begin 题目编创
@@ -176,7 +172,7 @@ problem表中新建一条记录，内容为用户所填信息
 end 题目编创
 ```
 
-## 试卷上传
+### 试卷上传
 
 ```PLD
 begin 试卷上传
@@ -185,7 +181,7 @@ begin 试卷上传
 end 试卷上传
 ```
 
-## 题面信息修改
+### 题目修改
 
 ```PLD
 begin 题面修改
@@ -199,7 +195,7 @@ begin 题面修改
 end 题面修i该
 ```
 
-## 修改密码
+### 修改密码
 
 ```PLD
 begin 修改密码
@@ -214,7 +210,7 @@ begin 修改密码
 end 修改密码
 ```
 
-## 系统日志查询
+### 日志查询
 
 ```PLD
 begin 日志查询
@@ -232,7 +228,7 @@ begin 日志查询
 end 日志查询
 ```
 
-## 公告系统
+### 公告系统
 
 ```PLD
 begin 发布公告
@@ -242,5 +238,196 @@ begin 发布公告
 	end if
 end 发送公告
 ```
+
+# 前端
+
+## 用户端
+
+### 登录
+
+```pdl
+begin 用户登录
+if<用户没有输入用户名|用户没有输入密码>then
+	提示用户输入用户名或密码
+	
+else if<用户输入用户名格式错误|密码格式错误> then 
+	提示用户输入正确的用户名或密码
+else if<用户正确输入用户名|密码> then
+	将数据提交后端，并返回结果
+	if<true> then success
+	else then 提示返回的错误
+	end if
+end if
+end 用户登录
+```
+
+### 注册
+
+```pdl
+begin 用户注册
+if<用户没有输入必填项> then
+	提示用户输入完整
+else if<用户注册信息存在> then
+	返回‘用户已存在’
+else then 将数据传到后端，返回结果，跳到登录页
+end if
+end 用户注册
+```
+
+### 用户做题
+
+```pdl
+begin 用户做题
+WHILE
+loop while<user.subjectList==undifined|用户继续选择做题>
+if<user.chose!=undefined> then
+	数据传到后端，返回结果，并显示答案
+else then 提示用户选择答案
+end if
+end loop
+end 用户做题
+```
+
+### 学科添加
+
+```pdl
+begin 学科添加
+WHILE
+loop while<用户继续选择添加学科|学科已全部添加完毕>
+if<user.chose!=undefined> then
+	数据传到后端，返回结果
+	if<success> then
+	显示成功添加
+	else then
+	显示失败原因
+else then 提示用户选择学科
+end if
+end loop
+end 学科添加
+```
+
+### 修改信息
+
+```pdl
+begin 修改信息
+if<用户输入邮箱格式错误|电话号码格式错误>then
+	提示用户正确输入邮箱或者电话号码
+else if<用户正确输入> then
+	将数据提交后端，并返回结果
+	if<true> then success
+	else then 提示返回的错误
+	end if
+end if
+end 修改信息
+```
+
+### 修改密码
+
+```pdl
+begin 修改密码
+if<没有输入|两次输入的密码不一致>then
+	提示用户正确输入
+else if<用户正确输入> then
+	将数据提交后端，并返回结果
+	if<true> then success
+	else then 提示返回的错误
+	end if
+end if
+end 修改密码
+```
+
+### 查看信息
+
+```pdl
+begin 查看信息
+向后端发送请求
+end 查看信息
+```
+
+### 试卷
+
+```PDL
+begin 试卷
+if<user.chose!=undefined> then
+	数据传到后端，返回结果，并显示答案
+else then 提示用户先选择学科
+end if
+end 试卷
+```
+
+
+
+## 教师端/管理员
+
+### 登录
+
+```pdl
+begin 登录
+if<用户没有输入用户名|用户没有输入密码>then
+	提示用户输入用户名或密码
+else if<用户输入用户名格式错误|密码格式错误> then 
+	提示用户输入正确的用户名或密码
+else if<用户正确输入用户名|密码> then
+	将数据提交后端，并返回结果
+	if<true> then success
+	else then 提示返回的错误
+	end if
+end if
+end 登录
+```
+
+### 学生管理--add
+
+```pdl
+begin 学生管理
+if<输入学生信息> then
+	if<信息输入错误> then
+		返回错误信息
+	else 返回正确信息 ，表单刷新
+	end if
+end if
+end 学生管理
+```
+
+### 教师管理--add
+
+```pdl
+begin 教师管理
+if<输入信息> then
+	if<信息输入错误> then
+		返回错误信息
+	else 返回正确信息 ，表单刷新
+	end if
+end if
+end 教师管理
+```
+
+### 题目管理--add
+
+```pdl
+begin 题目管理
+if<输入信息> then
+	if<信息输入错误> then
+		返回错误信息
+	else 返回正确信息 ，表单刷新
+	end if
+end if
+end 题目管理
+```
+
+
+
+### 试卷管理
+
+```pdl
+begin 试卷管理
+if<上传文件> then
+	数据提交后端，返回信息
+	if<success> 返回正确信息
+	else 返回错误信息
+end if
+end 试卷管理
+```
+
 
 
