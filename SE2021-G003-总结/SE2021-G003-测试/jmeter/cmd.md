@@ -1,0 +1,1 @@
+jmeter -n -t C:\Users\ChenZihui\Desktop\2021秋\软件工程\测试\jmeter测试\adminApiTest.jmx -l adminApiTest -e -o C:\Users\ChenZihui\Desktop\2021秋\软件工程\测试\jmeter测试\ansAdmin
